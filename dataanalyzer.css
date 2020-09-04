@@ -1,0 +1,26 @@
+body * {
+	font-family: verdana;
+	font-size: 12px;
+}
+.dataTable {
+	border: 1px solid #000066;
+}
+.TableHeaderBG {
+	background-color: #000066;
+	color: white;
+	font-weight: bold;
+}
+.TablerowBG1 {
+	background-color: #94CAE4;
+}
+.TablerowBG2 {
+	background-color: #DDEEF7;
+}
+.dataTable td {
+	border-bottom: 1px solid #000066;
+}
+.chartCSS {
+	margin: 5px;
+	float: left;
+	border: 1px solid black;
+}

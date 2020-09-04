@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Read Cell Data From Excel Sheet </title> 
+
+
+
+    <script language="javascript">
+                                    function ReadData(cell,row){
+                                                var excel = new ActiveXObject("Excel.Application");
+                                                var excel_file = excel.Workbooks.Open("C:\\htmlPractice\\JeepList.xlsx");
+                                                var excel_sheet = excel.Worksheets("JeepList");
+                                                var data = excel_sheet.Cells(cell,row).Value;
+                                                document.getElementById('div1').innerText =data;
+                                    } 
+    </script>
+
+ 
+</head>
+<body>
+    <p>
+        &nbsp;</p>
+    <center>
+        <p>
+            &nbsp;</p>
+        <div id="div1" style="width: '100%';" align="center">
+        </div>
+        <br />
+        <br />
+        <input type="button" value="Click To Read Your Cell (1,1) Value" onclick="ReadData(2,2);" />
+    </center>
+</body>
+</html> 
+
