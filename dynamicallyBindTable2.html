@@ -55,8 +55,8 @@ $("#tblJeepLists").append(html);
 }   
 }    
 });    
-</script>    
 
+</script>    
 
 <div id="piechart"></div>
 
@@ -104,6 +104,54 @@ function drawChart() {
 }
 </script>
 
+</script>    
+
+
+<div id="piechart2"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+
+ var excel = new ActiveXObject("Excel.Application");
+ var excel_file = excel.Workbooks.Open("C:\\htmlPractice\\JeepList2.xlsx");
+ var excel_sheet = excel.Worksheets("JeepList");
+ var task1 = excel_sheet.Cells(2,1).Value;
+ var task2 = excel_sheet.Cells(3,1).Value;
+ var task3 = excel_sheet.Cells(4,1).Value;
+ var task4 = excel_sheet.Cells(5,1).Value;
+ var task5 = excel_sheet.Cells(6,1).Value;
+
+ var data1 = excel_sheet.Cells(2,2).Value;
+ var data2 = excel_sheet.Cells(3,2).Value;
+ var data3 = excel_sheet.Cells(4,2).Value;
+ var data4 = excel_sheet.Cells(5,2).Value;
+ var data5 = excel_sheet.Cells(6,2).Value;
+
+
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  [task1, data1],
+  [task2, data2],
+  [task3, data3],
+  [task4, data4],
+  [task5, data5]
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'My Daily Activities', 'width':550, 'height':400};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+  chart.draw(data, options);
+}
+</script>
 
     
 	<input TYPE="button" VALUE="Analyze" ONCLICK="doAnalyze()"><br>
