@@ -1,0 +1,120 @@
+<!DOCTYPE html>    
+<html lang="en">    
+<head>    
+  <title>My Daily Activities Example</title>    
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="dataanalyzer.css" />
+  <script language="JavaScript" src="DataAnalyzer.js"> </script>
+  <script language="JavaScript" src="jscharts.js"></script>
+  <script language="JavaScript" src="swfobject.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">    
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>    
+</head>    
+<body>    
+    
+<div class="container">    
+ <table class="table table-striped" id="JeepTable">    
+<thead>    
+<tr>    
+<th>Task</th>    
+<th>Hours per Day</th>    
+<tr>    
+</thead>    
+<tbody id="tblJeepLists"><tbody>    
+</table>    
+     
+</div>    
+    
+<script>    
+$(document).ready(function(){ 
+
+ var excel = new ActiveXObject("Excel.Application");
+ var excel_file = excel.Workbooks.Open("C:\\htmlPractice\\JeepList2.xlsx");
+ var excel_sheet = excel.Worksheets("JeepList");
+ var task1 = excel_sheet.Cells(2,1).Value;
+ var task2 = excel_sheet.Cells(3,1).Value;
+ var task3 = excel_sheet.Cells(4,1).Value;
+ var task4 = excel_sheet.Cells(5,1).Value;
+ var task5 = excel_sheet.Cells(6,1).Value;
+
+ var data1 = excel_sheet.Cells(2,2).Value;
+ var data2 = excel_sheet.Cells(3,2).Value;
+ var data3 = excel_sheet.Cells(4,2).Value;
+ var data4 = excel_sheet.Cells(5,2).Value;
+ var data5 = excel_sheet.Cells(6,2).Value;
+
+ 
+var taskList=[task1,task2,task3,task4,task5];
+var jeepList=[data1,data2,data3,data4,data5];    
+if(jeepList.length>0){  
+for(i=0;i<jeepList.length;i++){    
+var html="<tr><td>"+taskList[i]+"</td><td>"+jeepList[i]+"</td></tr>";    
+$("#tblJeepLists").append(html);    
+}   
+}    
+});    
+</script>    
+
+
+<div id="piechart"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+
+ var excel = new ActiveXObject("Excel.Application");
+ var excel_file = excel.Workbooks.Open("C:\\htmlPractice\\JeepList2.xlsx");
+ var excel_sheet = excel.Worksheets("JeepList");
+ var task1 = excel_sheet.Cells(2,1).Value;
+ var task2 = excel_sheet.Cells(3,1).Value;
+ var task3 = excel_sheet.Cells(4,1).Value;
+ var task4 = excel_sheet.Cells(5,1).Value;
+ var task5 = excel_sheet.Cells(6,1).Value;
+
+ var data1 = excel_sheet.Cells(2,2).Value;
+ var data2 = excel_sheet.Cells(3,2).Value;
+ var data3 = excel_sheet.Cells(4,2).Value;
+ var data4 = excel_sheet.Cells(5,2).Value;
+ var data5 = excel_sheet.Cells(6,2).Value;
+
+
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  [task1, data1],
+  [task2, data2],
+  [task3, data3],
+  [task4, data4],
+  [task5, data5]
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'My Daily Activities', 'width':550, 'height':400};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+</script>
+
+
+    
+	<input TYPE="button" VALUE="Analyze" ONCLICK="doAnalyze()"><br>
+		<div id="AnalysisStatus"></div>
+		<div id="chartContainer"></div>
+		<script language="JavaScript">
+		      var analyzer = new DataAnalyzer('analyzer', 'JeepTable', 1, true);
+			  function doAnalyze() {
+				analyzer.start();
+			  }	
+		</script>
+		
+</body>    
+</html>   
